@@ -7,7 +7,7 @@ mojang_bp := mojang + "/development_behavior_packs/{{name}}_{{bp_uuid}}"
 mojang_rp := mojang + "/development_resource_packs/{{name}}_{{rp_uuid}}"
 
 bump TYPE:
-    mcbe bump \
+    cu bump \
     -p ./behavior_packs/pack0/manifest.json \
     -p ./resource_packs/pack1/manifest.json \
     -t {{ TYPE }}
@@ -21,16 +21,16 @@ build-watch:
     node esbuild.config.mjs --watch
 
 link:
-    mcbe link \
+    cu link \
     -i ./behavior_packs/pack0 \
     -o "{{mojang_bp}}"
-    mcbe link \
+    cu link \
     -i ./resource_packs/pack1 \
     -o "{{mojang_rp}}"
 
 unlink:
-    mcbe unlink "{{mojang_bp}}"
-    mcbe unlink "{{mojang_rp}}"
+    cu unlink "{{mojang_bp}}"
+    cu unlink "{{mojang_rp}}"
 
 mcaddon:
     Compress-Archive \
