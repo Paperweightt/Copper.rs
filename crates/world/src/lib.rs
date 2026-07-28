@@ -64,8 +64,8 @@ mod tests {
         create_world(
             new_path,
             String::from("test"),
-            vec![String::from("uuid teehee")],
-            vec![String::from("uuid teehehehe")],
+            vec![String::from("rp uuid")],
+            vec![String::from("bp uuid")],
         );
     }
 }
