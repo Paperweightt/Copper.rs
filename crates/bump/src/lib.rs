@@ -24,7 +24,7 @@ pub fn bump_pack(args: BumpArgs) {
         let manifest = match Manifest::new(path) {
             Ok(manifest) => manifest,
             Err(error) => {
-                eprintln!("[mcbe_cli] Problem parsing the manifest: {error}");
+                eprintln!("[cu] Problem parsing the manifest: {error}");
                 continue;
             }
         };
@@ -48,9 +48,9 @@ pub fn bump_pack(args: BumpArgs) {
         manifest.set_version(min_version);
 
         if let Err(error) = manifest.save() {
-            println!("[mcbe_cli] Problem saving the manifest: {error}");
+            println!("[cu] Problem saving the manifest: {error}");
         } else {
-            eprintln!("[mcbe_cli] Successfully set manifest to {min_version:?}")
+            eprintln!("[cu] Successfully set manifest to {min_version:?}")
         }
     }
 }

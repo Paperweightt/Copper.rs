@@ -3,6 +3,7 @@ use chrono::Local;
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 use std::time::Instant;
+use world::create_world;
 
 #[derive(Parser)]
 struct Cli {
@@ -35,6 +36,15 @@ enum Command {
     },
     Unlink {
         input: PathBuf,
+    },
+    World {
+        name: String,
+        #[arg(short, long)]
+        input: PathBuf,
+        #[arg(short, long, default_value = "./")]
+        rp_uuids: Vec<String>,
+        #[arg(short, long, default_value = "./")]
+        bp_uuids: Vec<String>,
     },
 }
 
@@ -72,5 +82,11 @@ fn read_cli() {
         } => init::handle_init_command(&template, path, &name, &description),
         Command::Link { input, output } => link::link(&input, &output),
         Command::Unlink { input } => link::unlink(&input),
+        Command::World {
+            name,
+            input,
+            rp_uuids,
+            bp_uuids,
+        } => create_world(input, name, rp_uuids, bp_uuids),
     };
 }

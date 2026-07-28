@@ -78,7 +78,7 @@ impl TemplateRegistry {
         } else {
             Err(io::Error::new(
                 io::ErrorKind::NotFound,
-                format!("[mcbe_cli] Template '{}' does not exist.", template_name),
+                format!("[cu] Template '{}' does not exist.", template_name),
             ))
         }
     }
@@ -92,11 +92,11 @@ pub fn handle_init_command(
 ) {
     let registry = TemplateRegistry::new();
 
-    println!("[mcbe_cli] Initializing template: {}...", template_name);
+    println!("[cu] Initializing template: {}...", template_name);
 
     match registry.instantiate(template_name, &output_dir, name, description) {
-        Ok(_) => println!("[mcbe_cli] Successfully generated project template"),
-        Err(error) => eprintln!("[mcbe_cli] Error generating template: {error}"),
+        Ok(_) => println!("[cu] Successfully generated project template"),
+        Err(error) => eprintln!("[cu] Error generating template: {error}"),
     }
 }
 
@@ -138,8 +138,8 @@ mod tests {
             "very cool name",
             "long cool description",
         ) {
-            Ok(_) => println!("[mcbe_cli] Successfully generated project template"),
-            Err(error) => eprintln!("[mcbe_cli] Error generating template: {error}"),
+            Ok(_) => println!("[cu] Successfully generated project template"),
+            Err(error) => eprintln!("[cu] Error generating template: {error}"),
         }
     }
 }
