@@ -5,6 +5,10 @@ prettier := ".\\node_modules\\.bin\\prettier.cmd"
 mojang := env_var("USERPROFILE")+"/AppData/Roaming/Minecraft Bedrock/Users/Shared/games/com.mojang"
 mojang_bp := mojang + "/development_behavior_packs/{{name}}_{{bp_uuid}}"
 mojang_rp := mojang + "/development_resource_packs/{{name}}_{{rp_uuid}}"
+mojang_world := mojang + "/minecraftWorlds" 
+
+init: link
+    npm i
 
 bump TYPE:
     cu bump \
@@ -38,4 +42,10 @@ mcaddon:
     -DestinationPath "./dist/{{name}}.mcaddon" \
     -CompressionLevel "Optimal" \
     -Force
-    
+
+mcworld: 
+    cu world \
+    -n "{{name}}" \
+    -i "{{mojang_world}}" \
+    -r {{rp_uuid}} \
+    -b {{bp_uuid}}
