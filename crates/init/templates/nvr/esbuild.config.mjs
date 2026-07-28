@@ -47,14 +47,19 @@ async function build() {
     .catch((error) => {
       if (error.errors) {
         error.errors.forEach((err) => {
-          notifyNvim(`Location: ${err.location?.file}:${err.location?.line}`, 3);
+          notifyNvim(
+            `Location: ${err.location?.file}:${err.location?.line}`,
+            3,
+          );
         });
       }
     });
 }
 
 function notifyNvim(message, level = 0) {
-  spawn("nvr", ["-c", `lua require("notify")("${message}",${level})`]);
+  try {
+    spawn("nvr", ["-c", `lua require("notify")("${message}",${level})`]);
+  } catch (error) {}
 }
 
 main().catch(() => process.exit(1));
