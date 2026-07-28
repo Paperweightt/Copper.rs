@@ -38,12 +38,13 @@ enum Command {
         input: PathBuf,
     },
     World {
+        #[arg(short, long, default_value = String::from("My World"))]
         name: String,
         #[arg(short, long)]
         input: PathBuf,
-        #[arg(short, long, default_value = "./")]
+        #[arg(short, long)]
         rp_uuids: Vec<String>,
-        #[arg(short, long, default_value = "./")]
+        #[arg(short, long)]
         bp_uuids: Vec<String>,
     },
 }
