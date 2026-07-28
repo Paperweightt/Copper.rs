@@ -291,6 +291,7 @@ dependencies = [
  "clap",
  "init",
  "link",
+ "world",
 ]
 
 [[package]]
@@ -1685,6 +1686,15 @@ dependencies = [
  "serde_json",
  "unicode-xid",
  "wasmparser",
+]
+
+[[package]]
+name = "world"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "include_dir",
+ "uuid",
 ]
 
 [[package]]

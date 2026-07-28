@@ -5,7 +5,7 @@ members = [
     "crates/bump",
     "crates/init",
     "crates/transpile",
-    "crates/link",
+    "crates/link", "crates/world",
 ]
 resolver = "2"
 
