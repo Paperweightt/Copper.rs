@@ -460,7 +460,7 @@ checksum = "5c0e531d93d39c34eef561e929e8a7f86d77a5af08aac4f6d6e39976c51858e9"
 
 [[package]]
 name = "bump"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "clap",
  "mcbe_core",
@@ -842,7 +842,7 @@ dependencies = [
 
 [[package]]
 name = "cu"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "bump",
  "chrono",
@@ -1776,7 +1776,7 @@ dependencies = [
 
 [[package]]
 name = "init"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "clap",
  "include_dir",
@@ -2002,7 +2002,7 @@ checksum = "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
 
 [[package]]
 name = "link"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "junction",
 ]
@@ -2055,7 +2055,7 @@ dependencies = [
 
 [[package]]
 name = "mcbe_core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "serde",
  "serde_json",
@@ -4226,7 +4226,7 @@ dependencies = [
 
 [[package]]
 name = "transpile"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "oxc_allocator",
  "oxc_ast",
@@ -4801,7 +4801,7 @@ dependencies = [
 
 [[package]]
 name = "world"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "bedrock",
  "chrono",

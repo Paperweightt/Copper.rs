@@ -31,11 +31,8 @@ test TEST:
   cargo test -p {{TEST}} -- --nocapture 
 
 publish version:
-    @$content = Get-Content ".\Cargo.toml" -Raw
-    @$new = $content -replace '(?m)^version = ".*"$', 'version = "{{version}}"'
-    @Set-Content ".\Cargo.toml" -Value $new
-    @cargo check --workspace
-    @git add -A
-    @git commit -m "release: v{{version}}"
-    @git tag v{{version}}
-    @git push --follow-tags
+    cargo check --workspace
+    git add -A
+    git commit -m "release: v{{version}}"
+    git tag v{{version}}
+    git push --follow-tags
