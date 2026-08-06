@@ -35,6 +35,5 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            installer/dist/copper-installer.exe
-            target/release/cu.exe
+          files: installer/dist/copper-installer.exe
+          fail_on_unmatched_files: true
