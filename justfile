@@ -4,10 +4,8 @@ inno :=  "C:\\Users\\henry\\AppData\\Local\\Programs\\Inno Setup 6\\ISCC.exe"
 default:
     @just --list
 
-build:
+local-deploy:
     cargo install --path crates/cli
-
-install: build
     $cfgPath = "$Env:USERPROFILE\.cargo\bin"
     $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
     if ($userPath -notlike ("*" + $cfgPath + "*")) {\
@@ -17,10 +15,13 @@ install: build
     Write-Host "Cargo bin is already in your PATH." -ForegroundColor Yellow; \
     }
 
-build-inno: build
+build-inno: 
+    cargo install --path crates/cli
     & "{{inno}}" .\installer\setup.iss
 
-local-deploy-inno: build-inno
+local-deploy-inno:
+    cargo install --path crates/cli
+    & "{{inno}}" .\installer\setup.iss
     .\installer\dist\copper-installer.exe
 
 test-all:
@@ -28,3 +29,10 @@ test-all:
 
 test TEST:
   cargo test -p {{TEST}} -- --nocapture 
+
+publish version:
+  cargo set-version {{version}}
+  git add "./Cargo.toml"
+  git commit -m "release: v{{version}}"
+  git tag v{{version}}
+  git push --follow-tags

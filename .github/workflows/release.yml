@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Install Inno Setup
+        run: choco install innosetup -y
+
+      - name: Set version
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}" -replace '^v', ''
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Build Installer
+        run: iscc /DCOPPER_VERSION=$env:VERSION installer/setup.iss
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            installer/dist/copper-installer.exe
+            target/release/cu.exe

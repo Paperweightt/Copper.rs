@@ -1,11 +1,13 @@
 #define MyAppName "copper.rs"
-#define MyAppVersion "0.1.0"
+#ifndef COPPER_VERSION
+#define COPPER_VERSION "0.1.0"
+#endif
 #define MyAppPublisher "paperweightt"
 #define MyAppExeName "copper.exe"
 
 [Setup]
 AppName={#MyAppName}
-AppVersion={#MyAppVersion}
+AppVersion={#COPPER_VERSION}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={autopf}\copper
 DefaultGroupName={#MyAppName}
