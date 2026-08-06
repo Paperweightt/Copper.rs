@@ -7,4 +7,9 @@ edition = "2024"
 
 clap = { workspace = true }
 include_dir = { workspace = true }
+filetime = { workspace = true }
 uuid = { workspace = true }
+chrono = { workspace = true }
+bedrock = { git = "https://github.com/bedrock-crustaceans/bedrock-rs.git", features = ["full"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
