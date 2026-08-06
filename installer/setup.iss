@@ -1,9 +1,9 @@
 #define MyAppName "copper.rs"
 #ifndef COPPER_VERSION
-#define COPPER_VERSION "0.1.0"
+#define COPPER_VERSION "0.1.1"
 #endif
 #define MyAppPublisher "paperweightt"
-#define MyAppExeName "copper.exe"
+#define MyAppExeName "cu.exe"
 
 [Setup]
 AppName={#MyAppName}
