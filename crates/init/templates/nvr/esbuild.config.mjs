@@ -57,9 +57,10 @@ async function build() {
 }
 
 function notifyNvim(message, level = 0) {
-  try {
-    spawn("nvr", ["-c", `lua require("notify")("${message}",${level})`]);
-  } catch (error) {}
+  spawn("nvr", ["-c", `lua require("notify")("${message}",${level})`]).on(
+    "error",
+    () => {},
+  );
 }
 
 main().catch(() => process.exit(1));
