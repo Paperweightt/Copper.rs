@@ -1,44 +1,42 @@
 set windows-shell := ["powershell.exe", "-NoProfile", "/c"]
 
-prettier := ".\\node_modules\\.bin\\prettier.cmd"
-
 mojang := env_var("USERPROFILE")+"/AppData/Roaming/Minecraft Bedrock/Users/Shared/games/com.mojang"
-mojang_bp := mojang + "/development_behavior_packs/{{name}}_{{bp_uuid}}"
-mojang_rp := mojang + "/development_resource_packs/{{name}}_{{rp_uuid}}"
-mojang_world := mojang + "/minecraftWorlds" 
+bp_folder := mojang + "/development_behavior_packs/{{name}}_{{bp_uuid}}"
+rp_folder := mojang + "/development_resource_packs/{{name}}_{{rp_uuid}}"
+world_folder := mojang + "/minecraftWorlds" 
 
-init: link
-    npm i
+default:
+    npx just --list
 
 bump TYPE:
     cu bump \
     -p ./behavior_packs/pack0/manifest.json \
     -p ./resource_packs/pack1/manifest.json \
     -t {{ TYPE }}
-    {{prettier}} --write .\behavior_packs\pack0\manifest.json
-    {{prettier}} --write .\resource_packs\pack1\manifest.json
+    npx prettier --write .\behavior_packs\pack0\manifest.json
+    npx prettier --write .\resource_packs\pack1\manifest.json
 
 build:
-    node esbuild.config.mjs
+    npx tsdown --treeshake --no-unbundle
 
 build-watch:
-    node esbuild.config.mjs --watch
+    npx tsdown --watch
 
 link:
     cu link \
     -i ./behavior_packs/pack0 \
-    -o "{{mojang_bp}}"
+    -o "{{bp_folder}}"
     cu link \
     -i ./resource_packs/pack1 \
-    -o "{{mojang_rp}}"
+    -o "{{rp_folder}}"
 
 unlink:
-    cu unlink "{{mojang_bp}}"
-    cu unlink "{{mojang_rp}}"
+    cu unlink "{{bp_folder}}"
+    cu unlink "{{rp_folder}}"
 
 mcaddon:
     Compress-Archive \
-    -Path "./behavior_packs/pack0", "./resource_packs/pack1" \
+    -Path "./packs/BP", "./packs/RP/" \
     -DestinationPath "./dist/{{name}}.mcaddon" \
     -CompressionLevel "Optimal" \
     -Force
@@ -46,6 +44,6 @@ mcaddon:
 mcworld: 
     cu world \
     -n "{{name}}" \
-    -i "{{mojang_world}}" \
+    -i "{{world_folder}}" \
     -r {{rp_uuid}} \
     -b {{bp_uuid}}

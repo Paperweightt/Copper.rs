@@ -3,16 +3,19 @@
   "version": "0.1.0",
   "productName": "{{name}}",
   "description": "{{description}}",
+  "type": "module",
   "private": true,
   "devDependencies": {
-    "esbuild": "^0.25.5",
+    "@minecraft/server": "^2.0.0",
+    "@minecraft/server-ui": "^2.0.0",
+    "@types/node": "^26.6.5",
+    "glob": "^13.0.6",
     "prettier": "3.8.3",
-    "chokidar": "^5.0.0"
+    "rust-just": "^1.59.0",
+    "tsdown": "^0.23.2"
   },
   "dependencies": {
     "@minecraft/math": "^2.2.11",
-    "@minecraft/server": "^2.0.0",
-    "@minecraft/server-ui": "^2.0.0",
     "@minecraft/vanilla-data": "^1.21.90"
   }
 }

@@ -1,6 +1,6 @@
 # Compiled output directory
 /dist
-/behavior_packs/pack0/scripts
+/packs/BP/scripts/main.js
 generated/
 
 # Dependencies

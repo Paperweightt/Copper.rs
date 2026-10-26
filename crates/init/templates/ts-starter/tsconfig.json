@@ -7,9 +7,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "rootDir": "./scripts",
-    "outDir": "./behavior_packs/pack0/scripts"
+    "rootDir": "./src",
+    "outDir": "./packs/BP/scripts"
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "tsdown.config.ts"]
 }
-
