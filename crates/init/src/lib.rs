@@ -5,7 +5,6 @@ use std::io;
 use std::path::Path;
 use std::path::PathBuf;
 
-mod nvr;
 mod ts_starter;
 
 pub struct BumpArgs {
@@ -48,8 +47,6 @@ impl TemplateRegistry {
             templates: HashMap::new(),
         };
         registry.register(ts_starter::TypeScriptStarter);
-        registry.register(nvr::Nvr);
-
         registry
     }
 
