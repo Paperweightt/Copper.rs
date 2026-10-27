@@ -1,0 +1,143 @@
+{
+	"$schema": "https://biomejs.dev/schemas/latest/schema.json",
+	"files": {
+		"includes": ["**/*", "!tsdown.config.ts", "!packs/BP/scripts/*"]
+	},
+	"overrides": [
+		{
+			"includes": ["./packs/{BP,RP}/**/*.json"],
+			"json": { "parser": { "allowComments": true } }
+		}
+	],
+	"javascript": {
+		"formatter": { "lineWidth": 100 },
+		"linter": { "enabled": true }
+	},
+	"linter": {
+		"enabled": true,
+		"includes": ["**/*", "!tsdown.config.ts"],
+		"rules": {
+			"preset": "none",
+
+			"correctness": {
+				"noConstAssign": "warn",
+				"noConstantCondition": "warn",
+				"noConstantMathMinMaxClamp": "warn", // oxc/bad-min-max-func
+				"noEmptyCharacterClassInRegex": "warn",
+				"noEmptyPattern": "warn",
+				"noGlobalObjectCalls": "warn",
+				"noInvalidBuiltinInstantiation": "warn",
+				"noNonoctalDecimalEscape": "warn",
+				"noPrecisionLoss": "warn",
+				"noSelfAssign": "warn",
+				"noSetterReturn": "warn",
+				"noUnreachableSuper": "warn", // no-this-before-super
+				"noUnsafeFinally": "warn",
+				"noUnsafeOptionalChaining": "warn",
+				"noUnusedFunctionParameters": "warn", // no-unused-vars (params)
+				"noUnusedLabels": "warn",
+				"noUnusedPrivateClassMembers": "warn",
+				"noUnusedVariables": "warn", // no-unused-vars
+				"useIsNan": "warn",
+				"useValidForDirection": "warn",
+				"useValidTypeof": "warn",
+				"useYield": "warn"
+			},
+
+			"suspicious": {
+				"noAssignInExpressions": "warn", // no-cond-assign
+				"noAsyncPromiseExecutor": "warn",
+				"noCatchAssign": "warn", // no-ex-assign
+				"noClassAssign": "warn",
+				"noCompareNegZero": "warn",
+				"noConstantBinaryExpressions": "warn",
+				"noControlCharactersInRegex": "warn",
+				"noDebugger": "warn",
+				"noDoubleEquals": "warn", // eqeqeq
+				"noDuplicateCase": "warn",
+				"noDuplicateClassMembers": "warn",
+				"noDuplicateElseIf": "warn",
+				"noDuplicateEnumValues": "warn", // typescript/no-duplicate-enum-values
+				"noDuplicateObjectKeys": "warn", // no-dupe-keys
+				"noEmptyBlockStatements": "warn", // no-empty-static-block
+				"noEmptySource": "warn", // unicorn/no-empty-file
+				"noExplicitAny": "warn", // typescript/no-explicit-any
+				"noExtraNonNullAssertion": "warn", // typescript/no-extra-non-null-assertion
+				"noFunctionAssign": "warn",
+				"noGlobalAssign": "warn",
+				"noImportAssign": "warn",
+				"noImportCycles": "off", // import/no-cycle (off in oxlint)
+				"noIrregularWhitespace": "warn",
+				"noMisleadingInstantiator": "warn", // typescript/no-misused-new
+				"noNonNullAssertedOptionalChain": "warn", // typescript/no-non-null-asserted-optional-chain
+				"noParametersOnlyUsedInRecursion": "warn", // oxc/only-used-in-recursion
+				"noShadow": "warn",
+				"noShadowRestrictedNames": "warn",
+				"noSparseArray": "warn",
+				"noThenProperty": "warn", // unicorn/no-thenable
+				"noTsIgnore": "error", // typescript/prefer-ts-expect-error
+				"noUnassignedVariables": "warn", // no-unassigned-vars
+				"noUnsafeDeclarationMerging": "warn", // typescript/no-unsafe-declaration-merging
+				"noUnsafeNegation": "warn",
+				"noUselessEscapeInString": "warn", // no-useless-escape (string half)
+				"noUselessRegexBackrefs": "warn", // no-useless-backreference
+				"noWith": "warn",
+				"useAdjacentOverloadSignatures": "warn" // typescript/adjacent-overload-signatures
+			},
+
+			"complexity": {
+				"noBannedTypes": "warn", // typescript/ban-types + typescript/no-wrapper-object-types
+				"noExtraBooleanCast": "warn",
+				"noUselessCatch": "warn",
+				"noUselessEmptyExport": "warn", // typescript/no-useless-empty-export
+				"noUselessEscapeInRegex": "warn", // no-useless-escape (regex half)
+				"noUselessRename": "warn",
+				"noUselessThisAlias": "warn" // typescript/no-this-alias
+			},
+
+			"performance": {
+				"noAwaitInLoops": "off", // no-await-in-loop (off in oxlint)
+				"noDelete": "warn", // no-delete-var (broader: flags all delete ops)
+				"noNamespaceImport": "error" // import/no-namespace
+			},
+
+			"security": {
+				"noGlobalEval": "warn" // no-eval
+			},
+
+			"style": {
+				"noCommonJs": "error", // typescript/no-var-requires
+				"noDefaultExport": "warn", // import/no-default-export
+				"noNonNullAssertion": "warn", // typescript/no-non-null-assertion
+				"useArrayLiterals": "off", // unicorn/no-new-array (off in oxlint)
+				"useAsConstAssertion": "warn", // typescript/prefer-as-const
+				"useConsistentMemberAccessibility": {
+					// typescript/explicit-member-accessibility { accessibility: "explicit" }
+					"level": "warn",
+					"options": { "accessibility": "explicit" }
+				},
+				"useConsistentTypeDefinitions": {
+					// typescript/consistent-type-definitions { interface }
+					"level": "warn",
+					"options": { "style": "interface" }
+				},
+				"useConst": "warn", // prefer-const
+				"useImportsFirst": "error", // import/first
+				"useReadonlyClassProperties": "warn" // typescript/prefer-readonly
+			},
+
+			"nursery": {
+				"noArgumentsCallerOrCallee": "warn", // no-caller
+				"noDoubleComparison": "warn", // oxc/bad-comparison-sequence
+				"noFloatingPromises": "error", // typescript/no-floating-promises (type-aware)
+				"noMeaninglessVoidOperator": "off", // typescript/no-meaningless-void-operator (off in oxlint)
+				"noMisusedPromises": "warn", // typescript/no-misused-promises (type-aware)
+				"useAwaitThenable": "warn", // unicorn/no-unnecessary-await
+				"useExplicitReturnType": "error", // explicit-function-return-type
+				"useExplicitType": "warn", // typescript/explicit-module-boundary-types (broader)
+				"useStrictBooleanExpressions": "warn", // typescript/strict-boolean-expressions (type-aware)
+				"useStringStartsEndsWith": "warn" // unicorn/prefer-string-starts-ends-with
+			}
+		}
+	}
+}
