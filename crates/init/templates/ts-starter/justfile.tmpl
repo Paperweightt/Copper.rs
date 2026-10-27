@@ -17,10 +17,10 @@ bump TYPE:
     {{biome}} --write "./packs/{RP,BP}/manifest.json"
 
 build:
-    {{tsdown}} --treeshake --no-unbundle
+    {{tsdown}} --treeshake
 
 build-watch:
-    {{tsdown}} --watch
+    {{tsdown}} --watch --source-map --unbundle
 
 link:
     cu link -i ./packs/BP -o "{{bp_folder}}"

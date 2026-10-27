@@ -11,7 +11,6 @@ export default defineConfig({
 	outDir: "./packs/BP/scripts",
 	format: ["esm"],
 	sourcemap: false,
-	unbundle: true,
 	deps: {
 		neverBundle: ["@minecraft/server", "@minecraft/server-ui"],
 		alwaysBundle: allDependencies,
