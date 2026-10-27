@@ -1,49 +1,47 @@
 set windows-shell := ["powershell.exe", "-NoProfile", "/c"]
 
+prettier := "./node_modules/.bin/prettier.cmd"
+tsdown := "./node_modules/.bin/tsdown.cmd"
+just := "./node_modules/.bin/just.cmd"
+
 mojang := env_var("USERPROFILE")+"/AppData/Roaming/Minecraft Bedrock/Users/Shared/games/com.mojang"
 bp_folder := mojang + "/development_behavior_packs/{{name}}_{{bp_uuid}}"
 rp_folder := mojang + "/development_resource_packs/{{name}}_{{rp_uuid}}"
 world_folder := mojang + "/minecraftWorlds" 
 
 default:
-    npx just --list
+    {{just}} --list
 
 bump TYPE:
-    cu bump \
-    -p ./behavior_packs/pack0/manifest.json \
-    -p ./resource_packs/pack1/manifest.json \
-    -t {{ TYPE }}
-    npx prettier --write .\behavior_packs\pack0\manifest.json
-    npx prettier --write .\resource_packs\pack1\manifest.json
+    cu bump -p ./packs/RP/manifest.json -p ./packs/BP/manifest.json -t {{ TYPE }}
+    {{prettier}} --write "./packs/{RP,BP}/manifest.json"
 
 build:
-    npx tsdown --treeshake --no-unbundle
+    {{tsdown}} --treeshake --no-unbundle
 
 build-watch:
-    npx tsdown --watch
+    {{tsdown}} --watch
 
 link:
-    cu link \
-    -i ./behavior_packs/pack0 \
-    -o "{{bp_folder}}"
-    cu link \
-    -i ./resource_packs/pack1 \
-    -o "{{rp_folder}}"
+    cu link -i ./packs/BP -o "{{bp_folder}}"
+    cu link -i ./packs/RP -o "{{rp_folder}}"
 
 unlink:
     cu unlink "{{bp_folder}}"
     cu unlink "{{rp_folder}}"
 
 mcaddon:
-    Compress-Archive \
-    -Path "./packs/BP", "./packs/RP/" \
-    -DestinationPath "./dist/{{name}}.mcaddon" \
-    -CompressionLevel "Optimal" \
-    -Force
+    mkdir ./dist/addon/
+    Compress-Archive "./packs/BP","./packs/RP/" "./dist/addon/{{name}}.mcaddon" -f
 
 mcworld: 
-    cu world \
-    -n "{{name}}" \
-    -i "{{world_folder}}" \
+    cu world -n "{{name}}" -i "{{world_folder}}" \
     -r {{rp_uuid}} \
     -b {{bp_uuid}}
+
+clean:
+    rm -r -Force ./dist/*
+    gci -r -di "generated" | % { gci $_.FullName | rm -r -fo }
+
+validate:
+    mct validate -i ./packs/ -o ./dist/validate/
